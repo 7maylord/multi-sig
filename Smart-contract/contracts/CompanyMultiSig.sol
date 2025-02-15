@@ -16,9 +16,7 @@ contract CompanyMultiSig {
         uint256 approvals;
         uint256 timestamp; 
     }
-
-    
-
+  
     // Events
     event Deposit(address indexed sender, uint256 amount);
     event BudgetProposed(uint256 indexed budgetId, address indexed recipient, uint256 amount);
@@ -79,13 +77,13 @@ contract CompanyMultiSig {
         }
     }
 
-    // R    
-    function releaseBudget(uint256 _budgetId) internal {
+    // Release Funds in a Budget  
+    function releaseBudget(uint256 _budgetId) public onlyBoardMember {
         Budget storage budget = budgets[_budgetId];
 
         if (budget.approvals < boardMembers.length) revert ApprovalPending();
         if (budget.released) revert BudgetAlreadyReleased();
-        require(address(this).balance >= budget.amount, "Insufficient funds");
+        if (address(this).balance < budget.amount) revert InsufficientFunds();
 
         budget.released = true;
         budget.recipient.transfer(budget.amount);
@@ -93,8 +91,8 @@ contract CompanyMultiSig {
         emit BudgetReleased(_budgetId, budget.recipient, budget.amount);
     }
 
-    // Fetch status of a budget
-    function getBudgetStatus(uint256 _budgetId) external view returns (address recipient, uint256 amount, uint256 approvals, uint256 timestamp) {
+    // Fetch status of a Budget
+    function getBudgetStatus(uint256 _budgetId) external view returns (address recipient, uint256 amount, uint256 approvalCount, uint256 timestamp) {
         require(_budgetId < budgets.length, "Invalid Budget ID");
         Budget storage budget = budgets[_budgetId];
         return (budget.recipient, budget.amount, budget.approvals, budget.timestamp);
