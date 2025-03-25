@@ -40,7 +40,7 @@ describe("CompanyMultiSig", () => {
     it("Should set the correct board members", async () => {
       const { companyMultiSig, boardMembers } = await loadFixture(deployCompanyMultiSigFixture);
       const members = await companyMultiSig.getBoardMembers();
-      expect(members.length).to.equal(20); // Should have exactly 20 board members
+      expect(members.length).to.equal(20);
       expect(members[0]).to.equal(boardMembers[0]);
     });
   });
@@ -55,7 +55,7 @@ describe("CompanyMultiSig", () => {
 
       // Check if the budget is proposed correctly
       const budgets = await companyMultiSig.getBudgets();
-      expect(budgets.length).to.equal(1); // Only one budget should be proposed
+      expect(budgets.length).to.equal(1); 
       expect(budgets[0].recipient).to.equal(recipient.address);
       expect(budgets[0].amount.toString()).to.equal(budgetAmount.toString());
     });

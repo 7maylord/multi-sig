@@ -78,7 +78,7 @@ contract CompanyMultiSig {
     }
 
     // Release Funds in a Budget  
-    function releaseBudget(uint256 _budgetId) public onlyBoardMember {
+    function releaseBudget(uint256 _budgetId) internal onlyBoardMember {
         Budget storage budget = budgets[_budgetId];
 
         if (budget.approvals < boardMembers.length) revert ApprovalPending();

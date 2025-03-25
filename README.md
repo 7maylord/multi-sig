@@ -10,6 +10,12 @@ CompanyMultiSig is a multi-signature smart contract designed to facilitate decen
 - **Event Logging**: Tracks all deposits, approvals, and fund releases on the blockchain.
 - **Security Measures**: Ensures only board members can propose and approve budgets.
 
+## Contract Address : Lisk Sepolia
+   ```sh
+   0x02b87E6AcCa5d4B5AE02271E29b7f4BC6eB8f06D
+   ```
+   
+
 ## Smart Contract Details
 - **Solidity Version**: 0.8.28
 - **Events**:
@@ -28,7 +34,7 @@ CompanyMultiSig is a multi-signature smart contract designed to facilitate decen
 ### 1. Clone the Repository
 ```sh
 git clone https://github.com/7maylord/multi-sig
-cd multisig
+cd multi-sig
 ```
 
 ### 2. Install Dependencies
